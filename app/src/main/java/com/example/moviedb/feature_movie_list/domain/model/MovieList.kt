@@ -1,5 +1,6 @@
-package com.example.sogeti.mywatchlist.models
+package com.example.moviedb.feature_movie_list.domain.model
 
+import com.example.moviedb.feature_movie_list.domain.model.Movie
 import com.google.gson.annotations.SerializedName
 import java.util.ArrayList
 
