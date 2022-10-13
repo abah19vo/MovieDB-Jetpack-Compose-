@@ -1,4 +1,5 @@
 package com.example.moviedb
 
-class MovieApp {
-}
+import android.app.Application
+
+class MovieApp  : Application()
