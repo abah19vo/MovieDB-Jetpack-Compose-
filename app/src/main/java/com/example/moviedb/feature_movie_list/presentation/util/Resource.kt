@@ -1,4 +1,4 @@
-package com.example.moviedb.feature_movie_list.domain.util
+package com.example.moviedb.feature_movie_list.presentation.util
 
 sealed class Resource<T>(
     val data: T? = null,

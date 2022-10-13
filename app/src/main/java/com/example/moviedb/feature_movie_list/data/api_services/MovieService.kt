@@ -26,21 +26,6 @@ interface MovieService {
         @Query("pageNumber") pageNumber: Int,
         @Query("api_key") key: String = apiKey
     ): Response<MovieList>
-
-    companion object{
-        private var gson: Gson = GsonBuilder().create()
-        private val baseApiRetrofit by lazy<Retrofit>() {
-            Retrofit.Builder()
-                .baseUrl(movieBaseUrl)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
-
-        }
-        val movieService: MovieService by lazy {
-            baseApiRetrofit.create(MovieService::class.java)
-
-        }
-    }
 }
 
 
