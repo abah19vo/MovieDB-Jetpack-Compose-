@@ -3,9 +3,7 @@ package com.example.moviedb.feature_movie_list.domain.util
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities.*
 import android.os.Build
-import android.provider.ContactsContract.CommonDataKinds.Email.TYPE_MOBILE
 import com.example.moviedb.feature_movie_list.data.util.Constants
-import com.example.moviedb.feature_movie_list.data.util.ImageSize
 
 class InternetCheck {
 
@@ -27,5 +25,9 @@ class InternetCheck {
             }
             return false
         }
+
+
     }
+
+
 }

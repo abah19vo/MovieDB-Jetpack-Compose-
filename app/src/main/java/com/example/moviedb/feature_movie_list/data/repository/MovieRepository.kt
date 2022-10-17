@@ -1,8 +1,6 @@
 package com.example.moviedb.feature_movie_list.data.repository
 
 import com.example.moviedb.feature_movie_list.data.api_services.MovieServiceInstance
-import com.example.moviedb.feature_movie_list.data.util.Constants.imageBaseUrl
-import com.example.moviedb.feature_movie_list.data.util.ImageSize
 
 class MovieRepository {
 
