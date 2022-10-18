@@ -3,7 +3,10 @@ package com.example.moviedb.feature_movie_list.presentation.movies
 import android.annotation.SuppressLint
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.FlingBehavior
+import androidx.compose.foundation.gestures.ScrollScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -38,6 +41,7 @@ import com.example.moviedb.feature_movie_list.presentation.components.ErrorCompo
 import com.example.moviedb.feature_movie_list.presentation.components.ImageWithDescription
 import com.example.moviedb.feature_movie_list.presentation.components.Loading
 import com.example.moviedb.feature_movie_list.presentation.util.Resource
+import com.example.moviedb.feature_movie_list.presentation.util.Screen
 import com.example.moviedb.ui.theme.Shapes
 import com.example.moviedb.ui.theme.gray800
 import org.intellij.lang.annotations.JdkConstants
@@ -82,13 +86,22 @@ fun MovieListBody(
     movieList:MovieList
 ){
 
-    LazyVerticalGrid(columns = GridCells.Fixed(2)){
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(0.dp,20.dp),
+
+    ){
 
         items(movieList.results){movie->
             ImageWithDescription(
-                imageModel= movie.backdropPath,
+                modifier = Modifier.padding(bottom = 10.dp)
+                    .clickable {
+                        navController.navigate(Screen.MovieDetailsView.route+"?movieId=${movie.id}")
+                       },
+                imageModel= viewModel.getImagePath(movie.posterPath),
                 text = movie.title,
                 subText = movie.releaseDate,
+
             )
         }
     }
