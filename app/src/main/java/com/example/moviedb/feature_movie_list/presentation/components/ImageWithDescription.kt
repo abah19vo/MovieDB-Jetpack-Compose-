@@ -1,9 +1,11 @@
 package com.example.moviedb.feature_movie_list.presentation.components
 
+import android.text.style.ClickableSpan
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -25,20 +27,26 @@ import com.example.moviedb.ui.theme.gray800
 fun ImageWithDescription(
     modifier: Modifier = Modifier,
     shape : Shape = Shapes.small,
-    imageModel: String,
+    imageModel: String?=null,
     text: String,
     subText: String,
 ) {
+
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+
     ) {
-        AsyncImage(
-            model = imageModel,
-            contentDescription = "",
-            modifier = modifier.clip(shape = shape),
-            contentScale = ContentScale.Crop,
-            placeholder = painterResource( R.drawable.ic_launcher_background),//Todo
-        )
+        if(imageModel!=null){
+            AsyncImage(
+                model = imageModel,
+                contentDescription = "",
+                modifier = Modifier.clip(shape = shape),
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource( R.drawable.ic_launcher_background),
+            )
+        }
+
 
         Column(
             modifier = Modifier
@@ -64,13 +72,10 @@ fun ImageWithDescription(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 2,
             )
+            
+
         }
     }
 
 }
 
-@Preview(name = "Image_with_description")
-@Composable
-private fun PreviewImage_with_description() {
-    //ImageWithDescription()
-}
