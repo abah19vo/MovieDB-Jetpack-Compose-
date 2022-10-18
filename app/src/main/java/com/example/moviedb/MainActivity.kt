@@ -38,7 +38,9 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Screen.MovieListView.route
                         ){
-                            MovieListView()
+                            MovieListView(
+                                navController = navController
+                            )
                         }
                         composable(
                             route = Screen.MovieDetailsView.route+
@@ -54,7 +56,8 @@ class MainActivity : ComponentActivity() {
                             )
                         ){
                             MovieDetailView(
-                                it.arguments?.getInt("movieId"),
+                                navController = navController,
+                                movieId = it.arguments?.getInt("movieId"),
                                 )
                         }
                     }
