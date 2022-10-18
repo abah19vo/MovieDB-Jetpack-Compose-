@@ -7,11 +7,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.moviedb.MovieDBApp
+import com.example.moviedb.feature_movie_list.data.util.Constants
 import com.example.moviedb.feature_movie_list.domain.model.MovieDetails
 import com.example.moviedb.feature_movie_list.domain.use_case.GetMovieById
 import com.example.moviedb.feature_movie_list.domain.util.CustomException
+import com.example.moviedb.feature_movie_list.domain.util.ImageSize
 import com.example.moviedb.feature_movie_list.presentation.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import okio.IOException
 import retrofit2.Response
@@ -23,27 +26,24 @@ class MovieDetailViewModel  @Inject constructor(
         private val getMovieByIdUseCase: GetMovieById,
     ) : AndroidViewModel(app) {
 
-    val movieResource: MutableLiveData<Resource<MovieDetails>> = MutableLiveData()
+    val movieState : MutableStateFlow<Resource<MovieDetails>> = MutableStateFlow(Resource.Loading<MovieDetails>())
 
-    init {
-        getMovieList();
+    fun getImagePath(path:String?, size: ImageSize = ImageSize.LARGE):String = "${Constants.imageBaseUrl}${size.value}/$path"
+
+    fun getMovieDetails(movieId:Int?) = viewModelScope.launch {
+        getMovieDetailsCall(movieId)
     }
 
-
-    private fun getMovieList() = viewModelScope.launch {
-        getMoviesCall()
-    }
-
-    private suspend fun getMoviesCall(){
-        movieResource.postValue(Resource.Loading())
+    private suspend fun getMovieDetailsCall(movieId:Int?){
+        movieState.value = Resource.Loading()
         try {
-            val response = getMovieByIdUseCase.invoke(connectivityManager(), -1)
-            movieResource.postValue(handleGetMovieDetailsResponse(response))
+            val response = getMovieByIdUseCase.invoke(connectivityManager(), movieId)
+            movieState.value = handleGetMovieDetailsResponse(response)
         }catch (e:Throwable){
             when(e){
-                is IOException -> movieResource.postValue(Resource.Error(CustomException.NetworkFailure().data))
-                is CustomException ->  movieResource.postValue( Resource.Error(e.data) )
-                else -> movieResource.postValue(Resource.Error(CustomException.UnexpectedError().data))
+                is IOException -> movieState.value = Resource.Error(CustomException.NetworkFailure().data)
+                is CustomException ->  movieState.value =  Resource.Error(e.data)
+                else -> movieState.value =  Resource.Error(CustomException.UnexpectedError().data)
             }
         }
     }
