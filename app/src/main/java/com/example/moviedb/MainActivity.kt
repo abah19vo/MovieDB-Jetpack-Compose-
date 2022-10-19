@@ -6,17 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.NavType
-import com.example.moviedb.feature_movie_list.presentation.util.Screen
-import com.example.moviedb.ui.theme.MovieDBTheme
-import dagger.hilt.android.AndroidEntryPoint
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.moviedb.feature_movie_list.presentation.movie_details.MovieDetailView
 import com.example.moviedb.feature_movie_list.presentation.movies.MovieListView
+import com.example.moviedb.feature_movie_list.presentation.util.Screen
+import com.example.moviedb.ui.theme.MovieDBTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

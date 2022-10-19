@@ -10,7 +10,7 @@ class MovieServiceInstance {
 
     companion object{
         private var gson: Gson = GsonBuilder().create()
-        private val baseApiRetrofit by lazy<Retrofit>() {
+        private val baseApiRetrofit by lazy<Retrofit> {
             Retrofit.Builder()
                 .baseUrl(Constants.movieBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson))

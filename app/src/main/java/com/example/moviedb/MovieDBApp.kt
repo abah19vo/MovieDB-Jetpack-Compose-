@@ -5,7 +5,7 @@ import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
-class MovieDBApp : Application() {}
+class MovieDBApp : Application()
 
 
 

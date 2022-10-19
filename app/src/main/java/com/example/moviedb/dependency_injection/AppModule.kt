@@ -27,7 +27,7 @@ object AppModule{
     @Provides
     @Singleton
     fun provideMovieRepository(): MovieRepository {
-        return MovieRepository();
+        return MovieRepository()
     }
 
 }

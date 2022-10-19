@@ -1,11 +1,9 @@
 package com.example.moviedb.feature_movie_list.presentation.components
 
-import android.text.style.ClickableSpan
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,12 +14,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.moviedb.R
+import com.example.moviedb.ui.theme.LightColorPalette
 import com.example.moviedb.ui.theme.Shapes
-import com.example.moviedb.ui.theme.gray800
 
 @Composable
 fun ImageWithDescription(
@@ -41,7 +38,9 @@ fun ImageWithDescription(
             AsyncImage(
                 model = imageModel,
                 contentDescription = "",
-                modifier = Modifier.clip(shape = shape),
+                modifier = Modifier
+                    .clip(shape = shape)
+                    .background(LightColorPalette.onPrimary).padding(1.dp),
                 contentScale = ContentScale.Crop,
                 placeholder = painterResource( R.drawable.ic_launcher_background),
             )
@@ -66,7 +65,7 @@ fun ImageWithDescription(
                 )
             Text(
                 text = subText,
-                style = MaterialTheme.typography.body1.copy(color = gray800),
+                style = MaterialTheme.typography.body1,
                 modifier = Modifier
                     .width(150.dp),
                 overflow = TextOverflow.Ellipsis,

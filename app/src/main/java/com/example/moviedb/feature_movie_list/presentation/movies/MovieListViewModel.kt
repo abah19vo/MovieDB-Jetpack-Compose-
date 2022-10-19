@@ -5,13 +5,13 @@ import android.content.Context
 import android.net.ConnectivityManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviedb.feature_movie_list.domain.model.MovieList
-import com.example.moviedb.feature_movie_list.domain.use_case.GetMovieList
-import com.example.moviedb.feature_movie_list.presentation.util.Resource
 import com.example.moviedb.MovieDBApp
 import com.example.moviedb.feature_movie_list.data.util.Constants.imageBaseUrl
+import com.example.moviedb.feature_movie_list.domain.model.MovieList
+import com.example.moviedb.feature_movie_list.domain.use_case.GetMovieList
 import com.example.moviedb.feature_movie_list.domain.util.CustomException
 import com.example.moviedb.feature_movie_list.domain.util.ImageSize
+import com.example.moviedb.feature_movie_list.presentation.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -24,12 +24,16 @@ class MovieListViewModel  @Inject constructor(
     app: Application,
     private val getMovieListUseCase: GetMovieList
 ) : AndroidViewModel(app) {
-    val movieState: MutableStateFlow<Resource<MovieList>> = MutableStateFlow(Resource.Loading<MovieList>())
+    val movieState: MutableStateFlow<Resource<MovieList>> = MutableStateFlow(Resource.Loading())
 
     init {
-        getMovieList();
+        getMovieList()
     }
 
+    public fun refresh(){
+        getMovieList()
+
+    }
 
     fun getImagePath(path:String):String =  "$imageBaseUrl${ImageSize.LARGE.value}/$path"
 

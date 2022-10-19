@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.moviedb.MovieDBApp
 import com.example.moviedb.feature_movie_list.data.util.Constants
@@ -26,9 +25,13 @@ class MovieDetailViewModel  @Inject constructor(
         private val getMovieByIdUseCase: GetMovieById,
     ) : AndroidViewModel(app) {
 
-    val movieState : MutableStateFlow<Resource<MovieDetails>> = MutableStateFlow(Resource.Loading<MovieDetails>())
+    val movieState : MutableStateFlow<Resource<MovieDetails>> = MutableStateFlow(Resource.Loading())
 
     fun getImagePath(path:String?, size: ImageSize = ImageSize.LARGE):String = "${Constants.imageBaseUrl}${size.value}/$path"
+
+    public fun refresh(movieId:Int?) {
+        getMovieDetails(movieId)
+    }
 
     fun getMovieDetails(movieId:Int?) = viewModelScope.launch {
         getMovieDetailsCall(movieId)

@@ -1,34 +1,43 @@
 package com.example.moviedb.feature_movie_list.presentation.components
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.moviedb.ui.theme.MovieDBTheme
+import com.example.moviedb.ui.theme.typography
 
 @Composable
-fun LazyRowTitle(
+fun SectionWithTitle(
     modifier: Modifier = Modifier,
     title:String ="",
-    componets:  Unit
+    content:  @Composable () -> Unit
 ) {
-    Column() {
-        Text(text = "Spoken Languages")
+    Column(modifier) {
+        Text(title, style = typography.body1 )
         Spacer(modifier = Modifier.height(20.dp))
-        LazyRow {
-            componets
-        }
-
+        content()
         Spacer(modifier = Modifier.height(50.dp))
     }
 }
 
-@Preview(name = "LazyRowTitle")
+@Preview(name = "LazyRowTitle", showBackground = true)
 @Composable
 private fun PreviewLazyRowTitle() {
-    LazyRowTitle()
+    SectionWithTitle(
+        title = "hello",
+
+    ){
+        MovieDBTheme() {
+            TextCard(
+                title = "Title",
+                subTitle = "Content"
+            )
+        }
+
+    }
 }
