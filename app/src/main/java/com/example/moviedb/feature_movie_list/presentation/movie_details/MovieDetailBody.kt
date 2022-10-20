@@ -32,10 +32,7 @@ fun MovieDetailsBody(
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
-
         ){
-
-
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -59,23 +56,17 @@ fun MovieDetailsBody(
                     ),
                 )
                 Spacer(modifier = Modifier.height(25.dp))
-
                 Text(
                     text = movieDetails.overview,
                     style = MaterialTheme.typography.body1,
                 )
-
             }
-
             Spacer(modifier = Modifier.height(25.dp))
-
             LazyRow(
                 contentPadding= PaddingValues(1.dp)
             ) {
-
                 item{
                     Box(Modifier.padding(horizontal = 20.dp)) {
-
                         TextCard(
                             title = "votes",
                             subTitle = movieDetails.voteCount.toString()
@@ -89,7 +80,6 @@ fun MovieDetailsBody(
                             subTitle = movieDetails.voteAverage.toString()
                         )
                     }
-
                 }
                 item{
                     Box(Modifier.padding(horizontal = 20.dp)) {
@@ -98,7 +88,6 @@ fun MovieDetailsBody(
                             subTitle = movieDetails.budget.toString()
                         )
                     }
-
                 }
                 item{
                     Box(Modifier.padding(horizontal = 20.dp)) {
@@ -107,7 +96,6 @@ fun MovieDetailsBody(
                             subTitle = movieDetails.revenue.toString()
                         )
                     }
-
                 }
                 item{
                     Box(Modifier.padding(horizontal = 20.dp)) {
@@ -116,13 +104,9 @@ fun MovieDetailsBody(
                             subTitle = movieDetails.status
                         )
                     }
-
                 }
-
             }
-
             Spacer(modifier = Modifier.height(50.dp))
-
             SectionWithTitle(
                 title = "Production companies",
                 content = {
@@ -136,21 +120,17 @@ fun MovieDetailsBody(
                                 imageModel = company.logoPath?.let { getImagePath(it, ImageSize.SMALL) },
                                 text = company.name,
                                 subText = company.originCountry
-
                             )
-
                         }
                     }
                 }
             )
-
             SectionWithTitle(
                 title ="Production countries",
                 content = {
                     LazyRow {
                         items(movieDetails.productionCountries){ company ->
                             Box(Modifier.padding(horizontal = 10.dp)) {
-
                                 TextCard(
                                     title = company.name,
                                     subTitle = company.iso31661,
@@ -160,7 +140,6 @@ fun MovieDetailsBody(
                     }
                 }
             )
-
             SectionWithTitle(
                 title = "Genres",
                 content = {
@@ -169,7 +148,6 @@ fun MovieDetailsBody(
                             Box(
                                 Modifier.padding(horizontal = 10.dp)
                             ) {
-
                                 TextCard(
                                     subTitle = item.name,
                                     verticalArrangement = Arrangement.Center
@@ -179,7 +157,6 @@ fun MovieDetailsBody(
                     }
                 }
             )
-
             SectionWithTitle(
                 title ="Spoken Languages",
                 content = {
@@ -196,7 +173,6 @@ fun MovieDetailsBody(
                 }
             )
         }
-
     }
 }
 

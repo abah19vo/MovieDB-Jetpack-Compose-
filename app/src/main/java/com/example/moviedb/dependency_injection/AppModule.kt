@@ -1,5 +1,6 @@
 package com.example.moviedb.dependency_injection
 
+import com.example.moviedb.feature_movie_list.data.repository.IMovieRepository
 import com.example.moviedb.feature_movie_list.data.repository.MovieRepository
 import com.example.moviedb.feature_movie_list.domain.use_case.GetMovieById
 import com.example.moviedb.feature_movie_list.domain.use_case.GetMovieList
@@ -14,19 +15,19 @@ import javax.inject.Singleton
 object AppModule{
     @Provides
     @Singleton
-    fun provideGetMovieById( repository: MovieRepository): GetMovieById {
+    fun provideGetMovieById( repository: IMovieRepository): GetMovieById {
         return GetMovieById( repository)
     }
 
     @Provides
     @Singleton
-    fun provideGetMovieList( repository: MovieRepository): GetMovieList {
+    fun provideGetMovieList( repository: IMovieRepository): GetMovieList {
         return GetMovieList( repository)
     }
 
     @Provides
     @Singleton
-    fun provideMovieRepository(): MovieRepository {
+    fun provideMovieRepository(): IMovieRepository {
         return MovieRepository()
     }
 

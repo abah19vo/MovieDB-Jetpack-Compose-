@@ -21,8 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieDetailViewModel  @Inject constructor(
-        app: Application,
-        private val getMovieByIdUseCase: GetMovieById,
+    app: Application,
+    private val getMovieByIdUseCase: GetMovieById,
     ) : AndroidViewModel(app) {
 
     val movieState : MutableStateFlow<Resource<MovieDetails>> = MutableStateFlow(Resource.Loading())

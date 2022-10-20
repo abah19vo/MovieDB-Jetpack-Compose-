@@ -28,36 +28,37 @@ fun MovieDetailView(
     val scaffoldState = rememberScaffoldState()
     viewModel.getMovieDetails(movieId)
     val state by viewModel.movieState.collectAsState()
-
     Scaffold(
         scaffoldState = scaffoldState,
-        content = {
-            Column(
-                modifier = Modifier
-                    .padding(it),
-            ){
-
-                when(state){
-                    is Resource.Success<MovieDetails> -> state.data?.let { movieDetails->
-                        MovieDetailsBody(
-                            getImagePath = { a: String, b: ImageSize -> viewModel.getImagePath(a, b) },
-                            movieDetails
-                        )
-                    }
-                    is Resource.Error -> state.message?.let { msg ->
-                        ErrorComponent(
-                            text= msg,
-                            buttonAction = {
-                                viewModel.refresh(movieId)
-                            }
-                        )
-                    }
-                    is Resource.Loading -> Loading()
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(it),
+        ) {
+            when (state) {
+                is Resource.Success<MovieDetails> -> state.data?.let { movieDetails ->
+                    MovieDetailsBody(
+                        getImagePath = { path: String, size: ImageSize ->
+                            viewModel.getImagePath(
+                                path,
+                                size
+                            )
+                        },
+                        movieDetails
+                    )
                 }
+                is Resource.Error -> state.message?.let { msg ->
+                    ErrorComponent(
+                        text = msg,
+                        buttonAction = {
+                            viewModel.refresh(movieId)
+                        }
+                    )
+                }
+                is Resource.Loading -> Loading()
             }
-        },
-
-    )
+        }
+    }
 }
 
 
