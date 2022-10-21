@@ -1,17 +1,12 @@
 package com.example.moviedb.feature_movie_list.domain.use_case
 
-import android.net.ConnectivityManager
 import com.example.moviedb.feature_movie_list.data.repository.IMovieRepository
 import com.example.moviedb.feature_movie_list.domain.model.MovieList
-import com.example.moviedb.feature_movie_list.domain.util.CustomException
-import com.example.moviedb.feature_movie_list.domain.util.InternetCheck
-import retrofit2.Response
+import com.example.moviedb.feature_movie_list.presentation.util.Resource
 
 class GetMovieList(private val repository: IMovieRepository) {
-    suspend operator fun invoke(connectivityManager: ConnectivityManager): Response<MovieList> {
-        if (InternetCheck.hasInternetConnection(connectivityManager))
-            return repository.getMovieList()
-        throw CustomException.NetworkFailure()
+    suspend operator fun invoke(): Resource<MovieList> {
+        return repository.getMovieList()
     }
 
 }

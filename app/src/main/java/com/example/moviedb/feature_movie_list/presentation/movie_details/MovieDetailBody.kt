@@ -105,6 +105,14 @@ fun MovieDetailsBody(
                         )
                     }
                 }
+                item{
+                    Box(Modifier.padding(horizontal = 20.dp)) {
+                        TextCard(
+                            title = "runtime",
+                            subTitle = movieDetails.runtime.toString()
+                        )
+                    }
+                }
             }
             Spacer(modifier = Modifier.height(50.dp))
             SectionWithTitle(
