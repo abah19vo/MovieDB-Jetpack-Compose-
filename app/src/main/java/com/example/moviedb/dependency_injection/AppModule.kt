@@ -30,5 +30,4 @@ object AppModule{
     fun provideMovieRepository(): IMovieRepository {
         return MovieRepository()
     }
-
 }
